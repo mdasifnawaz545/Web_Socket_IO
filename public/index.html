@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Web Socket</title>
+    </head>
+    <body>
+        <div>
+            <h1>Salaam</h1>
+            <br>
+            <br>
+            <label for="msg">Enter A Message : </label>
+            <input type="text" name placeholder="Message..." id="msg">
+            <button id="btn">Send</button>
+            <h1 id="had"></h1>
+        </div>
+        <script src="socket.io/socket.io.js">
+    </script>
+        <script>
+        const socket=io();
+        const msg=document.getElementById("msg")
+        const btn=document.getElementById("btn")
+        const headingtag=document.getElementById("had")
+        
+
+        btn.addEventListener("click",(e)=>{
+            const message=msg.value;
+            socket.emit('user-message',message)
+        })
+
+        socket.on("send-message",(message)=>{
+            headingtag.innerText=message;
+            console.log(message)
+        })
+        
+    </script>
+    </body>
+</html>
